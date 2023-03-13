@@ -26,6 +26,15 @@ def transcribe_audio(fileLoc):
   audio_file= open(fileLoc, "rb")
   transcript = openai.Audio.transcribe("whisper-1", audio_file)
   print(transcript.text)
+  return transcript.text
+
+def transcribe_and_summarize(fileLoc):
+  transcript = transcribe_audio(fileLoc)
+  if transcript is not None:
+    prompt = "Summarize the following audio transcript. Provide the topic of conversation as well as any key people mentioned or highlights:\n\n" + transcript
+    summary = generate_from_prompt(prompt)
+    print(summary)
+
    
 if __name__ == '__main__':
 
