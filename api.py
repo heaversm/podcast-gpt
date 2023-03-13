@@ -7,7 +7,6 @@ config = dotenv.dotenv_values(".env")
 openai.api_key = config['OPENAI_API_KEY']
 
 # USAGE: python api.py generate_from_prompt "This is a prompt"
-
 def generate_from_prompt(promptString):
   response = openai.Completion.create(
     model="text-davinci-003",
@@ -28,6 +27,7 @@ def transcribe_audio(fileLoc):
   print(transcript.text)
   return transcript.text
 
+#USAGE: python api.py transcribe_and_summarize "path/to/file.mp3"
 def transcribe_and_summarize(fileLoc):
   transcript = transcribe_audio(fileLoc)
   if transcript is not None:
